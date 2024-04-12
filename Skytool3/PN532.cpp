@@ -12,9 +12,9 @@ void PN532::getFirmwareVersion() {
 	
     commandAndResponse(1, 5);
     
-    std::cout << "A PN5" << std::hex << std::setw(1) << frameBuffer[1] << " was found, version: " << std::dec << frameBuffer[2] << "." << frameBuffer[3] << std::endl;
+    std::cout << "A PN5" << std::hex << std::setw(1) << +frameBuffer[1] << " was found, version: " << std::dec << +frameBuffer[2] << "." << +frameBuffer[3] << std::endl;
     
-    std::cout << "Supports code: " << std::hex << frameBuffer[4] << std::endl;
+    std::cout << "Supports code: " << std::hex << +frameBuffer[4] << std::endl;
 }
 
 //THIS MUST BE CALLED BEFORE DOING ANYTHING
@@ -118,7 +118,7 @@ void PN532::detectMifare1K(uint8_t uid[4]) {
     
     std::cout << "Found a tag with UID " << std::endl;
     printHexBytes(uid, 4, -1);
-    std::cout << std::hex << std::setw(2) << std::setfill('0') << "ATQA of " << frameBuffer[3] << " " << frameBuffer[4] << ", SAK of " << frameBuffer[5] << std::endl;
+    std::cout << "ATQA of " << std::hex << std::setw(2) << std::setfill('0') << +frameBuffer[3] << " " << std::setw(2) << std::setfill('0') << +frameBuffer[4] << ", SAK of " << std::setw(2) << std::setfill('0') << +frameBuffer[5] << std::endl;
 }
 
 /*

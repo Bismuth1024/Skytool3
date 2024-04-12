@@ -534,3 +534,10 @@ uint32_t conditionsToTrailer(uint8_t conditions[4]) {
 	return trailer;
 }
 
+void MIFARE_1K::loadFromFile(const char *filename, uint8_t startBlock, uint8_t endBlock) {
+    uint16_t nBytes = (startBlock - endBlock + 1) << 4;
+    readFile(filename, &data[startBlock][0], nBytes);
+    dataToParams(); //Copy in all the keys, UID, etc. to their own variables
+    memset(altered, startBlock, startBlock - endBlock + 1);
+}
+

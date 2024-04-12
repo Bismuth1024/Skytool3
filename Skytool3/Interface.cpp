@@ -96,7 +96,7 @@ void Interface::sendI2C(uint8_t i2caddr, uint8_t* data, uint8_t nBytes) {
 	std::memcpy(buffer + 7, data, nBytes);
 	
 	if (debug) {
-        std::cout << "Sending " << std::dec << nBytes << " bytes to I2C address 0x" << std::hex << std::setfill('0') << std::setw(2) << +i2caddr << ": " << std::endl;
+        std::cout << "Sending " << std::dec << +nBytes << " bytes to I2C address 0x" << std::hex << std::setfill('0') << std::setw(2) << +i2caddr << ": " << std::endl;
         printHexBytes(data, nBytes, -1);
 	}
 	
@@ -116,7 +116,7 @@ void Interface::receiveI2C(uint8_t i2caddr, uint8_t* destination, uint8_t nBytes
 
 
 	if (debug) {
-        std::cout << "Requesting " << std::dec << nBytes << " bytes from I2C address 0x" << std::hex << std::setfill('0') << std::setw(2) << +i2caddr << ": " << std::endl;	}
+        std::cout << "Requesting " << std::dec << +nBytes << " bytes from I2C address 0x" << std::hex << std::setfill('0') << std::setw(2) << +i2caddr << ": " << std::endl;	}
 	
 	sendAcknowledge(buffer, 7);
 	
@@ -134,7 +134,7 @@ void Interface::send(uint8_t* data, int nBytes) {
 	write(portID, data, nBytes);
 	
 	if (debug) {
-        std::cout << "Sending " << std::dec << nBytes << "bytes:" << std::endl;
+        std::cout << "Sending " << std::dec << nBytes << " bytes:" << std::endl;
 		printHexBytes(data, nBytes, -1);
 	}
 }
@@ -145,7 +145,7 @@ void Interface::receive(uint8_t* destination, int nBytes) {
     ssize_t n = read(portID, destination, nBytes);
 
     if (debug) {
-        std::cout << "Received " << std::dec << n << "bytes:" << std::endl;
+        std::cout << "Received " << std::dec << n << " bytes:" << std::endl;
         printHexBytes(destination, n, -1);
     }
     

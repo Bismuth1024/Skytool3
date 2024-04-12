@@ -1,9 +1,5 @@
 #include "misc.h"
 
-int status = 0;
-char* tempString = (char*)malloc(256);
-
-
 void swapEndian(uint8_t* data, int nBytes) {
 	uint8_t temp;
     
@@ -35,7 +31,7 @@ void printHexBytes(uint8_t* data, int nBytes, int nColumns) {
     for (int i = 0; i < nBytes; i++) {
         if ((i % nColumns) == 0) {
             std::cout << std::endl;
-            std::cout << "Block " << block << ": "; //Label the start of each block (row)
+            std::cout << "Block " << block << ": \t"; //Label the start of each block (row)
             block++;
         }
         std::cout << std::setw(2) << std::setfill('0') << std::hex << +data[i] << " "; //Print each byte
@@ -48,19 +44,18 @@ bool inRange(T x, T lower, T upper) {
 	return (x >= lower && x <= upper);
 }
 
-template <typename T>
-T bytesToInt(uint8_t* data, uint8_t nBytes, bool littleEndian) {
+uint64_t bytesToInt(uint8_t* data, uint8_t nBytes, bool littleEndian) {
     
-    if (nBytes > sizeof(T)) throw CodedException(0x01);
+    if (nBytes > 8) throw CodedException(0x01);
     
-	T out = 0;
+	uint64_t out = 0;
 
 	for (uint8_t i = 0; i < nBytes; i++) {
 		out = out << 8;
         if (littleEndian) {
-            out |= data[i];
-        } else {
             out |= data[nBytes - i - 1];
+        } else {
+            out |= data[i];
         }
 	}
 
@@ -69,7 +64,6 @@ T bytesToInt(uint8_t* data, uint8_t nBytes, bool littleEndian) {
 
 template <typename T>
 void intToBytes(T num, uint8_t nBytes, uint8_t* destination, bool littleEndian) {
-	//LITTLE ENDIAN
 	
 	uint64_t threshold = (0x01ULL << (nBytes << 3));
 	
@@ -163,5 +157,9 @@ uint64_t setBits(int n) {
 }
 
 template bool inRange(uint8_t, uint8_t, uint8_t);
+template void intToBytes(uint64_t, uint8_t, uint8_t*, bool);
+template void intToBytes(uint16_t, uint8_t, uint8_t*, bool);
+
+
 
 

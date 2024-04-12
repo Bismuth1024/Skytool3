@@ -25,7 +25,7 @@ These notices must be retained in any copies of any part of this
 documentation and/or software.
 */
 
-#include "md5.h"
+#include "MD5.h"
 
 MD5::MD5() {
     count[0] = count[1] = 0;

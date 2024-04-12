@@ -29,8 +29,6 @@ poly 0x8408
 "Useful data" starts at the cmd code.
 
 */
-class MIFARE_1K;
-
 class PN532 {
 public:
     //A whole bunch of constants, e.g. communication protocols, command codes, etc

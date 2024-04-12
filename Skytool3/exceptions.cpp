@@ -48,6 +48,36 @@ const char * CodedException::what() {
         case 0x0C:
             return "The requested operation can only be performed on a magic MIFARE_1K card.";
             break;
+        case 0x0D:
+            return "The specified data location should not be encrypted/decrypted on a Skylander.";
+            break;
+        case 0x0E:
+            return "Trying to encrypt/decrypt an already encrypted/decrypted Skylander.";
+            break;
+        case 0x0F:
+            return "This operation should only be done on a decrypted Skylander.";
+            break;
+        case 0x10:
+            return "Checksum error for Skylander.";
+            break;
+        case 0x11:
+            return "Unknown checksum type.";
+            break;
+        case 0x12:
+            return "Skylander maximum name length is 15 characters.";
+            break;
+        case 0x13:
+            return "Skylander maximum name XP is ____.";
+            break;
+        case 0x14:
+            return "Invalid hat name.";
+            break;
+        case 0x15:
+            return "The backup that you are trying to load doesn't match the UID of the Skylander that it is being uploaded to.";
+            break;
+        case 0x16:
+            return "The requested area is not a valid data area on a skylander.";
+            break;
         default:
             return "unknown error code";
     }

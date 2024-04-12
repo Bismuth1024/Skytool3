@@ -42,7 +42,7 @@ void swapEndian(uint8_t* data, int nBytes);
  nColumns: if -1, will just print until the end in one line.  If positive, each line will contain nColumns bytes.
  */
 
-void printHexBytes(uint8_t* data, int nBytes, int nColumns);
+void printHexBytes(uint8_t* data, int nBytes, int nColumns = -1);
 
 /*
  inRange: tests whether a numeric value is between upper and lower bounds (inclusive)
@@ -67,8 +67,7 @@ bool inRange(T x, T lower, T upper);
  ****maybe check this - template prone to bugs? no check for unsigned int
  
  */
-template <typename T>
-T bytesToInt(uint8_t* data, uint8_t nBytes, bool littleEndian);
+uint64_t bytesToInt(uint8_t* data, uint8_t nBytes, bool littleEndian);
 
 /*
  intToBytes: converts an integer to byte array little or big endian.  Will throw an exception if
@@ -80,7 +79,7 @@ T bytesToInt(uint8_t* data, uint8_t nBytes, bool littleEndian);
  
  return value: the decoded integer
  
- ****maybe check this - template prone to bugs? no check for unsigned int
+ ****maybe check this - template prone to bugs? no check for unsigned int !!!!!
  
  */
 template <typename T>

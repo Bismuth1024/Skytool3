@@ -7,17 +7,43 @@
 
 #include <stdio.h>
 #include "misc.h"
-#include "md5.h"
+#include "PN532.h"
+#include "MIFARE_1K.h"
+#include "MD5.h"
+#include "CRC.h"
+#include "AES.h"
+#include "Skylander.h"
 
 int main() {
-    uint8_t destination[16];
     
-    MD5::hash(destination, "test", 4);
-    printHexBytes(destination, 16, -1);
+    Interface* interface = new Interface("/dev/cu.usbserial-AR0KL3OY");
+    //interface->setDebug();
+    interface->begin(115200);
+    
+    PN532* pn = new PN532(interface);
+    pn->setDebug(true);
+    pn->getFirmwareVersion();
+    pn->SAMConfig();
+    
+    /*
+    Skylander* sk = new Skylander(pn);
     
     
-    return 0;
+    sk->read(pn, true);
+    Encryption::decrypt(sk);
+    sk->printInfo();
+    sk->dump();
+     */
+    
+    Skylander* sk = new Skylander("dumps/6/Figures/Bad Juju.dump");
+    Encryption::decrypt(sk);
+    sk->printInfo();
+     
+
+    
+     
+    
+
     
     
-    return 0;
 }
